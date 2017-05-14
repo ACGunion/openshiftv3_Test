@@ -35,9 +35,12 @@ RUN apt-get update \
 # forward request and error logs to docker log collector
 RUN ln -sf /dev/stdout /var/log/nginx/access.log \
 	&& ln -sf /dev/stderr /var/log/nginx/error.log
-  
+RUN mkdir -p /var/cache/nginx/client_temp && \
+	chmod -R ug+rwx /var/cache/nginx/client_temp
 
 EXPOSE 80
+EXPOSE 22
+EXPOSE 8080
 
 STOPSIGNAL SIGQUIT
 
